@@ -1,0 +1,236 @@
+/* ===========================
+   Reset & Base
+=========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ===========================
+   Layout
+=========================== */
+.game-container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+header {
+  text-align: center;
+  padding: 1rem 0 0.5rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #e94560;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 0.25rem;
+}
+
+/* ===========================
+   Controls
+=========================== */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.attempts-counter {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f9c74f;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+.btn-primary, .btn-secondary {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.btn-primary {
+  background: #e94560;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #444;
+  color: #ddd;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn-primary:active, .btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* ===========================
+   Message
+=========================== */
+.message {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.message-error { background: #c0392b; color: #fff; }
+.message-win   { background: #27ae60; color: #fff; }
+.message-lose  { background: #7f8c8d; color: #fff; }
+.message-info  { background: #2980b9; color: #fff; }
+
+/* ===========================
+   Peg colours
+=========================== */
+.peg-red    { background: #e74c3c; }
+.peg-blue   { background: #3498db; }
+.peg-green  { background: #2ecc71; }
+.peg-yellow { background: #f1c40f; }
+.peg-purple { background: #9b59b6; }
+.peg-orange { background: #e67e22; }
+
+/* ===========================
+   Current Guess
+=========================== */
+.current-guess-section h2,
+.picker-section h2,
+.board-section h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #aaa;
+  margin-bottom: 0.5rem;
+}
+
+.current-guess {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.guess-slot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid #555;
+  background: #16213e;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+
+.guess-slot.active-slot {
+  border-color: #f9c74f;
+  transform: scale(1.1);
+}
+
+.guess-slot:hover {
+  border-color: #e94560;
+}
+
+.guess-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ===========================
+   Color Picker
+=========================== */
+.color-picker {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.color-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.1s;
+}
+
+.color-btn:hover {
+  border-color: #fff;
+  transform: scale(1.1);
+}
+
+/* ===========================
+   Board
+=========================== */
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.board-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #16213e;
+  border-radius: 10px;
+  padding: 0.5rem 0.75rem;
+}
+
+.guess-pegs {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.peg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.hint-pegs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  width: 64px;
+  font-size: 1.1rem;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 360px) {
+  .guess-slot { width: 48px; height: 48px; }
+  .peg { width: 34px; height: 34px; }
+  .color-btn { width: 40px; height: 40px; }
+}

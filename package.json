@@ -1,0 +1,16 @@
+{
+  "name": "mastermind",
+  "version": "1.0.0",
+  "description": "Mastermind logic game in pure JavaScript",
+  "main": "src/controller.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
