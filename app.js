@@ -143,7 +143,7 @@ function revealSecretCode(code) {
    PALETTE – color selection
 ══════════════════════════════════════════════ */
 function buildPalette() {
-  COLORS.forEach(color => {
+  window.COLORS.forEach(color => {
     const btn = document.createElement('button');
     btn.className = `color-btn ${color}`;
     btn.setAttribute('aria-label', color);
