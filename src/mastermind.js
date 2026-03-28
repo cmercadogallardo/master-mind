@@ -152,6 +152,7 @@ function createGame() {
 
 if (typeof window !== 'undefined') {
   window.createGame = createGame;
+  window.COLORS = COLORS;
 }
 
 module.exports = {
