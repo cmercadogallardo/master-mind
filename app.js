@@ -59,7 +59,7 @@ function renderActiveRow() {
 
     /* clicking a filled slot removes that color */
     slot.addEventListener('click', () => {
-      if (game.isGameOver()) return;
+      if (game.isOver()) return;
       if (currentGuess[i]) {
         currentGuess.splice(i, 1);
         selectedSlot = currentGuess.length;
@@ -143,6 +143,7 @@ function revealSecretCode(code) {
    PALETTE – color selection
 ══════════════════════════════════════════════ */
 function buildPalette() {
+  if (!window.COLORS) throw new Error('Paleta de colores no definida');
   window.COLORS.forEach(color => {
     const btn = document.createElement('button');
     btn.className = `color-btn ${color}`;
@@ -155,7 +156,7 @@ function buildPalette() {
 
 /** Called when the user clicks a color button */
 function handleColorPick(color) {
-  if (game.isGameOver()) return;
+  if (game.isOver()) return;
   if (currentGuess.length >= SLOT_COUNT) return;
 
   currentGuess.push(color);
@@ -174,8 +175,7 @@ function handleSubmit() {
     const result = game.guess([...currentGuess]);
     renderAttemptRow({
       guess: currentGuess,
-      hits: result.hits,
-      coincidences: result.coincidences
+      hints: { exact: result.hits, partial: result.coincidences },
     });
     updateAttemptsLabel();
 
@@ -225,8 +225,12 @@ function handleClear() {
 /* ══════════════════════════════════════════════
    BOOTSTRAP
 ══════════════════════════════════════════════ */
-buildPalette();
-init();
+try {
+  buildPalette();
+  init();
+} catch (e) {
+  setMessage(`Error: ${e.message}`, 'error');
+}
 
 submitBtn.addEventListener('click', handleSubmit);
 clearBtn.addEventListener('click', handleClear);

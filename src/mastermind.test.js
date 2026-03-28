@@ -220,3 +220,33 @@ describe('createGame', () => {
     expect(game.getHistory()).toHaveLength(1);
   });
 });
+
+// ─────────────────────────────────────────────
+// Smoke Tests
+// ─────────────────────────────────────────────
+describe('Mastermind Smoke Tests', () => {
+  it('verifies COLORS is loaded and has 6 entries', () => {
+    expect(COLORS).toBeDefined();
+    expect(COLORS).toHaveLength(6);
+  });
+
+  it('verifies createGame returns a valid game object', () => {
+    const game = createGame();
+    expect(game).toBeDefined();
+    expect(typeof game.guess).toBe('function');
+    expect(typeof game.getAttemptsLeft).toBe('function');
+    expect(typeof game.isOver).toBe('function');
+    expect(typeof game.isWon).toBe('function');
+    expect(typeof game.getHistory).toBe('function');
+    expect(typeof game.revealSecretCode).toBe('function');
+  });
+
+  it('verifies a full winning game run', () => {
+    const game = createGame();
+    const secret = game.revealSecretCode();
+    const result = game.guess(secret);
+    expect(result.won).toBe(true);
+    expect(result.hits).toBe(CODE_LENGTH);
+    expect(game.isOver()).toBe(true);
+  });
+});
