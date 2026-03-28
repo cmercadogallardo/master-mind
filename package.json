@@ -1,0 +1,24 @@
+{
+  "name": "master-mind",
+  "version": "1.0.0",
+  "description": "- El sistema genera un código secreto de **4 colores** (rojo, azul, verde, amarillo, morado, naranja). - El jugador tiene **10 intentos** para adivinar el código. - **Pistas:**   - ✅ **Aciertos**: Color y posición correctos.   - 🔴 **Coincidencias**: Color correcto en posición errónea.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmercadogallardo/master-mind.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cmercadogallardo/master-mind/issues"
+  },
+  "homepage": "https://github.com/cmercadogallardo/master-mind#readme",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}
