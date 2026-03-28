@@ -170,31 +170,34 @@ function handleColorPick(color) {
 function handleSubmit() {
   if (currentGuess.length < SLOT_COUNT) return;
 
-  const result = game.submitGuess([...currentGuess]);
-  if (!result) return;
+  try {
+    const result = game.guess([...currentGuess]);
+    renderAttemptRow({
+      guess: currentGuess,
+      hits: result.hits,
+      coincidences: result.coincidences
+    });
+    updateAttemptsLabel();
 
-  renderAttemptRow(result);
-  updateAttemptsLabel();
-
-  currentGuess = [];
-  selectedSlot = 0;
-
-  if (game.isWon()) {
-    setMessage('🎉 ¡Felicidades! ¡Adivinaste el código!', 'win');
-    lockInput();
-  } else if (game.isGameOver()) {
-    setMessage('😢 ¡Sin intentos! El código era:', 'lose');
-    revealSecretCode(game.getSecretCode());
-    lockInput();
-  } else {
+    currentGuess = [];
     renderActiveRow();
     submitBtn.disabled = true;
-    const left = game.getAttemptsLeft();
-    if (left <= 3) {
-      setMessage(`⚠️ ¡Solo ${left === 1 ? 'queda' : 'quedan'} ${left} intento${left === 1 ? '' : 's'}!`, 'info');
+
+    if (game.isWon()) {
+      setMessage('🎉 ¡Felicidades! ¡Adivinaste el código!', 'win');
+      lockInput();
+    } else if (game.isOver()) {
+      setMessage('😢 ¡Sin intentos! El código era:', 'lose');
+      revealSecretCode(game.revealSecretCode());
+      lockInput();
     } else {
-      setMessage('', '');
+      const left = game.getAttemptsLeft();
+      if (left <= 3) {
+        setMessage(`⚠️ ¡Solo ${left === 1 ? 'queda' : 'quedan'} ${left} intento${left === 1 ? '' : 's'}!`, 'info');
+      }
     }
+  } catch (error) {
+    setMessage(error.message, 'error');
   }
 }
 
