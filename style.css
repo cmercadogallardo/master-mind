@@ -1,0 +1,270 @@
+/* =====================================================
+   style.css – Mastermind responsive styles
+   ===================================================== */
+
+/* ── Reset & base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #1a1a2e;
+  color: #e0e0e0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+h1 {
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  margin: 1rem 0 0.25rem;
+  letter-spacing: 0.05em;
+  color: #f0c040;
+  text-shadow: 0 0 12px #f0c04080;
+}
+
+/* ── Layout ── */
+.game-wrapper {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* ── Status bar ── */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #16213e;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+}
+
+.status-bar span {
+  font-weight: 600;
+}
+
+#attempts-label {
+  color: #f0c040;
+}
+
+/* ── Board (history of attempts) ── */
+#board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.attempt-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) auto;
+  align-items: center;
+  gap: 0.4rem;
+  background: #16213e;
+  border-radius: 10px;
+  padding: 0.45rem 0.6rem;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Color pegs ── */
+.peg {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.15);
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.15s;
+}
+
+.peg.rojo     { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+.peg.azul     { background: radial-gradient(circle at 35% 35%, #74b9ff, #2980b9); }
+.peg.verde    { background: radial-gradient(circle at 35% 35%, #55efc4, #27ae60); }
+.peg.amarillo { background: radial-gradient(circle at 35% 35%, #ffeaa7, #f39c12); }
+.peg.morado   { background: radial-gradient(circle at 35% 35%, #a29bfe, #6c5ce7); }
+.peg.naranja  { background: radial-gradient(circle at 35% 35%, #fdcb6e, #e17055); }
+.peg.empty    { background: #2d3561; border-color: #444; }
+
+/* ── Hint display ── */
+.hints {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 3px;
+  width: 44px;
+  min-width: 44px;
+}
+
+.hint-peg {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.hint-peg.exact   { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; }
+.hint-peg.partial { background: #e74c3c; box-shadow: 0 0 6px #e74c3c; }
+.hint-peg.none    { background: #34495e; }
+
+/* ── Active guess row ── */
+#active-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  background: #16213e;
+  border: 2px solid #f0c04060;
+  border-radius: 12px;
+  padding: 0.6rem;
+}
+
+.active-slot {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px dashed #f0c04080;
+  background: #2d3561;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: #aaa;
+  position: relative;
+  box-shadow: inset 0 -3px 6px rgba(0,0,0,0.3);
+}
+
+.active-slot.filled {
+  border-style: solid;
+  border-color: rgba(255,255,255,0.3);
+  color: transparent;
+}
+
+.active-slot:hover:not(.filled) {
+  border-color: #f0c040;
+  transform: scale(1.08);
+}
+
+/* inherit peg colors for filled slots */
+.active-slot.rojo     { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+.active-slot.azul     { background: radial-gradient(circle at 35% 35%, #74b9ff, #2980b9); }
+.active-slot.verde    { background: radial-gradient(circle at 35% 35%, #55efc4, #27ae60); }
+.active-slot.amarillo { background: radial-gradient(circle at 35% 35%, #ffeaa7, #f39c12); }
+.active-slot.morado   { background: radial-gradient(circle at 35% 35%, #a29bfe, #6c5ce7); }
+.active-slot.naranja  { background: radial-gradient(circle at 35% 35%, #fdcb6e, #e17055); }
+
+/* ── Color palette ── */
+#palette {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.color-btn {
+  width: clamp(42px, 12vw, 60px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.color-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+
+.color-btn.rojo     { background: radial-gradient(circle at 35% 35%, #ff6b6b, #c0392b); }
+.color-btn.azul     { background: radial-gradient(circle at 35% 35%, #74b9ff, #2980b9); }
+.color-btn.verde    { background: radial-gradient(circle at 35% 35%, #55efc4, #27ae60); }
+.color-btn.amarillo { background: radial-gradient(circle at 35% 35%, #ffeaa7, #f39c12); }
+.color-btn.morado   { background: radial-gradient(circle at 35% 35%, #a29bfe, #6c5ce7); }
+.color-btn.naranja  { background: radial-gradient(circle at 35% 35%, #fdcb6e, #e17055); }
+
+/* ── Action buttons ── */
+.action-buttons {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+button.btn {
+  padding: 0.55rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+  letter-spacing: 0.03em;
+}
+
+button.btn:active { transform: scale(0.96); }
+
+#submit-btn {
+  background: #f0c040;
+  color: #1a1a2e;
+  flex: 1;
+}
+
+#submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#clear-btn {
+  background: #e74c3c;
+  color: #fff;
+}
+
+#new-game-btn {
+  background: #27ae60;
+  color: #fff;
+}
+
+/* ── Message overlay ── */
+#message {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  min-height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+#message.win  { background: #1d6a3a; color: #2ecc71; }
+#message.lose { background: #5c1010; color: #e74c3c; }
+#message.info { background: #1a3a5c; color: #74b9ff; }
+
+/* ── Secret code reveal ── */
+#secret-reveal {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem 0;
+  min-height: 2.5rem;
+}
+
+/* ── Responsive tweaks ── */
+@media (max-width: 360px) {
+  .hints { width: 36px; min-width: 36px; }
+  .color-btn { width: 38px; }
+}
