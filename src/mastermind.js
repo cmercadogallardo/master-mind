@@ -150,6 +150,10 @@ function createGame() {
   };
 }
 
+if (typeof window !== 'undefined') {
+  window.createGame = createGame;
+}
+
 module.exports = {
   COLORS,
   CODE_LENGTH,
