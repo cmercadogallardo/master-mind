@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧠 Mastermind</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>🧠 Mastermind</h1>
+
+  <div class="game-wrapper">
+
+    <!-- Status bar -->
+    <div class="status-bar" role="status" aria-live="polite">
+      <span>Intentos restantes:</span>
+      <span id="attempts-count">10</span>
+      <button class="btn" id="new-game-btn">🔄 Nueva partida</button>
+    </div>
+
+    <!-- Message area -->
+    <div id="message" role="alert" aria-live="assertive"></div>
+
+    <!-- Secret code reveal (shown only on game over) -->
+    <div id="secret-reveal" aria-label="Código secreto revelado"></div>
+
+    <!-- History board – rows are prepended here -->
+    <div id="board" aria-label="Historial de intentos"></div>
+
+    <!-- Active guess row -->
+    <div id="active-row" aria-label="Intento actual"></div>
+
+    <!-- Color palette -->
+    <div id="palette" role="group" aria-label="Paleta de colores"></div>
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+      <button class="btn" id="clear-btn" aria-label="Borrar selección">🗑️ Borrar</button>
+      <button class="btn" id="submit-btn" disabled aria-label="Confirmar intento">✔ Confirmar</button>
+    </div>
+
+    <!-- Legend -->
+    <div style="font-size:0.8rem; color:#888; text-align:center; padding-bottom:0.5rem;">
+      <span style="color:#2ecc71">●</span> Acierto (color y posición correctos) &nbsp;
+      <span style="color:#e74c3c">●</span> Coincidencia (color correcto, posición errónea)
+    </div>
+
+  </div><!-- /.game-wrapper -->
+
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
