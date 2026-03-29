@@ -1,0 +1,11 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\MasterMind.Resources.resources
+obj\Debug\MasterMind.vbproj.GenerateResource.Cache
+obj\Debug\MasterMind.Form1.resources
+bin\Debug\MasterMind.exe
+bin\Debug\MasterMind.pdb
+bin\Debug\MasterMind.xml
+obj\Debug\MasterMind.exe
+obj\Debug\MasterMind.xml
+obj\Debug\MasterMind.pdb
+obj\Debug\MasterMind.frmInterface.resources
